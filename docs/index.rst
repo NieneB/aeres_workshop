@@ -3,7 +3,7 @@ Table of Contents
 -------------------
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    home.md
    Introduction in Vector tiles.md
@@ -29,7 +29,7 @@ In case you need it
 **In case you need it:**
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
     Making a web page.md
     Troubleshooting.md WebGL support
