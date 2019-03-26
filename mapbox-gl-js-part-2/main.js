@@ -34,22 +34,13 @@ var mystyle = {
             }
         },
         {
-            "id": "building_extrusion",
-            "type": "fill-extrusion",
+            "id": "buildings",
+            "type": "fill",
             "source": "cartiqo",
             "source-layer":"builtup",
-            "maxzoom": 22,
-            "minzoom": 11,
-            "filter":
-                [
-                    "==",
-                    "type",
-                    "building"
-                ],
             "paint": {
-                "fill-extrusion-height": 20,
-                "fill-extrusion-color": "#f37788",
-                "fill-extrusion-opacity": 0.9
+                "fill-color": "#f37788",
+                "fill-outline-color": "#ffffff"
             }
         },
         {

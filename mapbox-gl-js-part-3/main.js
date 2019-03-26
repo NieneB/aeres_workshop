@@ -2,7 +2,7 @@ var mystyle = {
     "version": 8,
     "name": "Mijn eigen Stijl",
     "glyphs": "https://ta.webmapper.nl/wm/glyphs/{fontstack}/{range}.pbf",
-    "sprite": "https://ta.webmapper.nl/wm/sprites/stb_icons",
+    "sprite": "https://ta.webmapper.nl/wm/sprites/wm_sprite",
     "sources": {
         "cartiqo": {
             "type": "vector",
