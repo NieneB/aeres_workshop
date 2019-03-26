@@ -1,11 +1,16 @@
 var mystyle = {
     "version": 8,
     "name": "Mijn eigen Stijl",
+    "glyphs": "https://ta.webmapper.nl/wm/glyphs/{fontstack}/{range}.pbf",
     "sources": {
-            "pdok": {
-                "type": "vector",
-                "tiles": ["http://geodata.nationaalgeoregister.nl/beta/topotiles/{z}/{x}/{y}.pbf"]
-            }
+        "cartiqo": {
+            "type": "vector",
+            "tiles": [
+                "https://ta.webmapper.nl/wm/cartiqo/{z}/{x}/{y}",
+                "https://tb.webmapper.nl/wm/cartiqo/{z}/{x}/{y}",
+                "https://tc.webmapper.nl/wm/cartiqo/{z}/{x}/{y}"
+            ]
+        }
     },
     "layers": [
         {
@@ -17,30 +22,63 @@ var mystyle = {
         },
         {
             "id": "admin",
-            "type": "fill",
-            "source": "pdok",
-            "source-layer": "admin",
+            "type": "line",
+            "source": "cartiqo",
+            "source-layer": "boundaries",
             "maxzoom": 22,
             "minzoom": 0,
-            "filter": ["==", "lod1", "province"],
+            "filter": ["==", "type", "province"],
             "paint": {
-                "fill-color": "#54D8CC",
-                "fill-outline-color": "#ffffff"
+                "line-color": "#54D8CC",
+                "line-width": 5
             }
         },
         {
             "id": "building_extrusion",
             "type": "fill-extrusion",
-            "source": "pdok",
-            "source-layer":"urban",
+            "source": "cartiqo",
+            "source-layer":"builtup",
             "maxzoom": 22,
             "minzoom": 11,
+            "filter":
+                [
+                    "==",
+                    "type",
+                    "building"
+                ],
             "paint": {
                 "fill-extrusion-height": 20,
                 "fill-extrusion-color": "#f37788",
                 "fill-extrusion-opacity": 0.9
             }
-        }
+        },
+        {
+            "id": "place-labels",
+            "type": "symbol",
+            "source": "cartiqo",
+            "source-layer": "labels",
+            "filter":
+                [
+                    "==",
+                    "type",
+                    "place"
+                ],
+            "minzoom": 8,
+            "maxzoom": 16,
+            "layout": {
+                "text-allow-overlap": false,
+                "text-padding": 1,
+                "text-size": 16,
+                "text-font":  ["Lato"],
+                "text-field": "{name}",
+            },
+            "paint": {
+                "text-halo-blur": 0.5,
+                "text-color":"#1d464d",
+                "text-halo-width": 1,
+                "text-halo-color": "#fff"
+            }
+        }      
     ]
 };
 
@@ -56,35 +94,3 @@ var map = new mapboxgl.Map({
 
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl(), "top-left");
-
-// Make a GEOJSON
-var wurjson = {
-    "type": "FeatureCollection",
-    "name": "15yrMGI",
-    "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-    "features": [
-        { "type": "Feature", "properties": { "fid": 0, "height": 60 }, "geometry": { "type": "Point", "coordinates": [5.66647, 51.98514] } },
-        { "type": "Feature", "properties": { "fid": 1, "height": 45 }, "geometry": { "type": "Point", "coordinates": [5.66801, 51.9864] } },
-        { "type": "Feature", "properties": { "fid": 2, "height": 100 }, "geometry": { "type": "Point", "coordinates": [5.66361, 51.98531] } },
-        { "type": "Feature", "properties": { "fid": 3, "height": 30 }, "geometry": { "type": "Polygon", "coordinates": [[[5.66554, 51.98675], [5.66832, 51.9875], [5.66778, 51.98825], [5.66602, 51.98779], [5.66591, 51.98784], [5.66501, 51.98758], [5.66498, 51.98753], [5.66554, 51.98675]]] } }
-    ]
-};
-// On Load add GeoJSON SOURCE and LAYER
-map.on('load', function (e) {
-    // ADD GEOJSON SOURCE
-    map.addSource('punten', {
-        'type': 'geojson',
-        'data': wurjson
-    });
-    // ADD an extra layer
-    map.addLayer({
-        'id': 'geojson-points',
-        'type': 'circle',
-        'source': 'punten',
-        'layout': {},
-        'paint': {
-            'circle-color': '#000fff',
-            'circle-radius': 10
-        }
-    });
-});
