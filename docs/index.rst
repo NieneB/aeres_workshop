@@ -4,16 +4,14 @@ Table of Contents
 
 .. toctree::
    :maxdepth: 1
-   :numbered:
+   :hidden:
 
-   Introduction in Vector tiles
-   Mapbox studio
-   MapboxGL js part 1
-   MapboxGL js part 2
-   MapboxGL js part 3
-   Hosting on Github
-
-
+    Introduction in Vector tiles
+    Mapbox studio
+    MapboxGL js part 1
+    MapboxGL js part 2
+    MapboxGL js part 3
+    Hosting on Github
     Making your own.md
     OpenMapTiles.md
     Tegola.md
@@ -21,16 +19,6 @@ Table of Contents
     Glyphs.md
     Sprite.md
     Vector Tiles in Qgis.md
-
-
-In case you need it
--------------------
-
-**In case you need it:**
-
-.. toctree::
-   :maxdepth: 2
-
     Making a web page
     Troubleshooting WebGL support
     CORS headers
@@ -41,11 +29,11 @@ In case you need it
 Welcome to the Aeres Workshop into Web mapping with Vector Tiles! 
 ========================================================================
 
-## Presentation
+Presentation
 -------------------
-This workshop will start with a [presentation](https://nieneb.github.io/mgi_workshop/) to introduce the basic concepts that are needed to do this workshop.
+This workshop will start with a `Link presentation <https://nieneb.github.io/mgi_workshop/>`_ to introduce the basic concepts that are needed to do this workshop.
 
-## Workshop Description
+Workshop Description
 -------------------
 Vector tile technologie is een nieuw alternatief op de traditionele raster image tiles voor web maps. Zij maken web maps sneller te publiceren en flexibeler vorm te geven.
 
@@ -55,7 +43,7 @@ Voor beginners ligt de focus op de front-end ontwikkeling. We maken een kaart te
 
 Voor gevorderden zijn er voorbeelden om vanuit PostGIS je eigen data te serveren als vector tiles met Tegola of T-rex en om OpenStreetMap data te serveren met OpenMapTiles Server. Als extra kan je de cartografische vormgeving verder uitwerken door zelf iconen (sprites) te maken en eigen lettertypes (glyphs) te gebruiken. Deze voorbeelden gebruiken Docker of NodeJS/NPM om de tools te installeren en draaien.
 
-## Short outline of the workshop
+Short outline of the workshop
 -------------------
 1. Try out [[Mapbox Studio]]
 Upload your own data and style this in the browser. 
@@ -70,18 +58,18 @@ Get loose from Mapbox and remove your access token to use the library at it full
 
 5. Put your map online so you can show your results with the world! 
 
-## At the end of the workshop you will be able to:
+At the end of the workshop you will be able to:
 
 * Style a simple map in Mapbox Studio.
 * Make a custom map with MapboxGL.js.
 * Style vector tiles from PDOK according to the  [Mapbox Style Specification](https://www.mapbox.com/mapbox-gl-js/style-spec/).
 
-## Goal 
+Goal 
 -------------------
 At the end of this workshop, you will have your own web page with an interactive map based on vector tiles! Custom styled by yourself! Your web page will be hosted on Github, so you can immediately share your progress of the day with all your family and friends!
 
 
-### Beginners
+ Beginners
 -------------------
 You need to know a little about: HTML, CSS & JS. 
 
@@ -95,11 +83,11 @@ Next you need a computer with:
 * a proper text editor, like [Visual Studio Code](https://code.visualstudio.com/) , [Nodepad ++](https://notepad-plus-plus.org/download/v7.6.html), [SublimeText](http://www.sublimetext.com/) or [Brackets](http://brackets.io/) with [Syntax Highlighting](https://en.wikipedia.org/wiki/Syntax_highlighting).
 * Internet
 
->### Syntax Highlighting
+> Syntax Highlighting
 >
 > Syntax highlighting is a feature of text editors that are used for programming, scripting, or mark-up languages, such as HTML. It displays text, especially source code, in different colours and fonts according to the category of terms to make them more visually distinct. Highlighting does not affect the meaning of the text itself; it is intended only for human readers.
 
-### Advanced
+ Advanced
 -------------------
 You need your own laptop with:
 
@@ -109,7 +97,7 @@ You need your own laptop with:
 * *Optional*: your own data in `PostGIS` or as `GeoPackage`
 
 
-## How does this tutorial work?
+How does this tutorial work?
 -------------------
 Just follow the links or the sidebar. At the bottom of each step is the link to the next step.
 
@@ -135,7 +123,7 @@ Some background information, extra information or debug tips are shown in grey :
 
 :link: Some additional reading materials or [interesting Links](https://findtheinvisiblecow.com/). 
 
-## Preparation
+Preparation
 -------------------
 :arrow_forward: On your computer create a directory for yourself, where we can work in today. For example:
 
@@ -143,7 +131,7 @@ Some background information, extra information or debug tips are shown in grey :
 
 In these directories we save everything we make and download today. During this workshop it is referred to as :open_file_folder:`yourDirectory`.
 
-## Let's start!
+Let's start!
 -------------------
 :arrow_right: If you are not that comfortable with HTML, CSS and JavaScript yet, this **[[Making a web page ]]** tutorial will help you along!
 
