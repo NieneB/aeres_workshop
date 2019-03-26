@@ -1,12 +1,12 @@
 # Hosting on Github
 
-:arrow_forward: Head over to GitHub.com and create a [new repository](https://github.com/new) name it: `MGIVectorMap`
+:arrow_forward: Head over to GitHub.com and create a [new repository](https://github.com/new) name it: `MyFirstVectorMap`
 
 ![](https://github.com/NieneB/Webmapping_for_beginners/wiki/img/create_repro.png)
 
 :arrow_forward: Give your repository a nice description. Like:
 
-	My First Vector Tile Map in Mapbox GL JS made during the MGI alumni day
+	My First Vector Tile Map in Mapbox GL JS made during a Webmapper workshop
 
 :arrow_forward: Setting: `Public`
 
@@ -72,7 +72,6 @@ I will make an overview of all the maps made today!
 :arrow_forward: Now share your link with all your family and friends! 
 
 **This was it!** Thank you for joining this workshop.
-If you want to learn more, check out the [[Advanced]] parts and the [[Interesting links]]! 
 
 Keep mapping!
 

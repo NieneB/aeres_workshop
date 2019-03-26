@@ -1,1 +1,1 @@
-Workshop developed by: Niene Boeijen - Webmapper - for MGI 15 years Alumni day 
+Workshop developed by: Niene Boeijen - Webmapper - for Aeres Hogeschool Geo Media Design

@@ -22,7 +22,7 @@ The map style itself is written as rules which define its visual appearance usin
 * What data to draw: [Sources](#sources)
 * What order to draw the data in: [Layers](#layers)
 * How to style the data when drawing it: [Layers](#layers)
-* Which fonts and icons to use: [Glyphs & Fonts](#glyps--fonts),   [Sprites & Icons](#sprites--icons)
+* Which fonts and icons to use: Glyphs & Fonts
 
 This is the basics of a style:
 
@@ -38,9 +38,21 @@ var mystyle = {
 ```
 :arrow_forward: Create a style object in your JavaScript `main.js` file. 
 
+```js
+var mystyle = {
+    "version": 8,
+    "name": "Mijn eigen Stijl",
+    "sources": {...},
+    "layers": [...]
+}
+```
+
 The 2 most important for now are the `sources` and the `layers`. The sources tell us where our data is coming from. Vector Tiles or GeoJSON data for example. By setting `layers` we can style every separate layer available in the vector tiles and assigning it colours etc. 
 
 In order to use this we need to create a style object in JavaScript and add it to the map definition, instead of the mapbox url. We can also remove the access token now. 
+
+:arrow_forward: Change the mapbox url style into your own style object
+
 
 ```js
 var map = new mapboxgl.Map({
@@ -54,26 +66,28 @@ var map = new mapboxgl.Map({
     });
 ```
 
-:arrow_forward: Change the mapbox url style into your own style object
-
 :arrow_forward: Remove your mapbox access token.
 
 ## Sources
 
-For now we start with 1 source, namely our vector tiles that are hosted by PDOK:
+For now we start with 1 source, namely our vector tiles that are hosted by Webmapper:
 
 ```
 "sources": {
-    "pdok":{
+    "cartiqo":{
         "type": "vector",
-        "tiles":  ["http://geodata.nationaalgeoregister.nl/beta/topotiles/{z}/{x}/{y}.pbf"]
+        "tiles":  [
+            "https://ta.webmapper.nl/wm/cartiqo/{z}/{x}/{y}",
+            "https://tb.webmapper.nl/wm/cartiqo/{z}/{x}/{y}",
+            "https://tc.webmapper.nl/wm/cartiqo/{z}/{x}/{y}"
+        ]
     }
 },
 ```
 
-:arrow_forward: Add this source to your `style` object.
+:arrow_forward: Replace `"sources": {...},` with this source object in the `mystyle` object.
 
-:information_source: The source name we give to it is `pdok` 
+:information_source: The source name we give to it is `cartiqo` 
 
 :information_source: The type of source is `vector` and the url to the tiles is given. 
 
@@ -92,15 +106,15 @@ Next we can create layers, accordingly on what layers are available in the vecto
         },
         {
             "id": "admin",
-            "type": "fill",
-            "source": "pdok",
-            "source-layer": "admin",
+            "type": "line",
+            "source": "cartiqo",
+            "source-layer": "boundaries",
             "maxzoom": 22,
             "minzoom": 0,
-            "filter": ["==", "lod1", "province"],
+            "filter": ["==", "type", "province"],
             "paint": {
-                "fill-color" :"#54D8CC",
-                "fill-outline-color": "#ffffff"
+                "line-color": "#54D8CC",
+                "line-width": 5
             }
         }
     ]
@@ -108,9 +122,13 @@ Next we can create layers, accordingly on what layers are available in the vecto
 
 :arrow_forward: Add these `layers` to your `style` object.
 
+Replace `"layers": [...]` with the code snippet. 
+
+:arrow_forward: Refresh the file in your browser and see your custom map!
+
 :information_source: The `"id"` is a custom name you give to the layer. You can give it any name you like.
 
-:information_source: The `"source"` is the name of the source provided in the beginning of the style object. We called it `"pdok"`.
+:information_source: The `"source"` is the name of the source provided in the beginning of the style object. We called it `"cartiqo"`.
 
 :information_source: The `"source-layer"` is the name of the data layer in the vector tiles. This information is fixed. We provided all the names of the layers for you already. A bit further on we will explain how you can request the vector tile information. 
 
@@ -124,111 +142,158 @@ There are more options you can give to a layer. For example:
  - minzoom
  - maxzoom
 
-
 We can go on and on with adding layers.
 
-:arrow_forward: Have a look at http://geodata.nationaalgeoregister.nl/beta/topotiles-viewer/styles/achtergrond.json to see a complete styling JSON for getting a map of the Netherlands. 
 
-:arrow_forward: Also have a look at the [PDOK Vector Tile documentation](https://github.com/PDOK/vectortiles-bgt-brt ) on how the vector tile set is build up.
+:arrow_forward: Try adding more layers and styling them!
 
-![pdok tiles 1](https://github.com/PDOK/vectortiles-bgt-brt/raw/master/img/schema_1.png)
-![pdok tiles](https://raw.githubusercontent.com/PDOK/vectortiles-bgt-brt/master/img/schema_2.png)
+For example:
 
-## Adding a GeoJSON
-We can add multiple sources to our style spec. Let's add some points from the GeoJSON. 
-
-### Make a GeoJSON
-
-:arrow_forward: In the `main.js` make a GeoJSON object
-
-```js
-
-// Make a GEOJSON
-var wurjson = {
-    "type": "FeatureCollection",
-    "name": "15yrMGI",
-    "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-    "features": [
-        { "type": "Feature", "properties": { "fid": 0, "height": 60 }, "geometry": { "type": "Point", "coordinates": [5.66647, 51.98514] } },
-        { "type": "Feature", "properties": { "fid": 1, "height": 45 }, "geometry": { "type": "Point", "coordinates": [5.66801, 51.9864] } },
-        { "type": "Feature", "properties": { "fid": 2, "height": 100 }, "geometry": { "type": "Point", "coordinates": [5.66361, 51.98531] } },
-        { "type": "Feature", "properties": { "fid": 3, "height": 30 }, "geometry": { "type": "Polygon", "coordinates": [[[5.66554, 51.98675], [5.66832, 51.9875], [5.66778, 51.98825], [5.66602, 51.98779], [5.66591, 51.98784], [5.66501, 51.98758], [5.66498, 51.98753], [5.66554, 51.98675]]] } }
-    ]
-};
+```json
+{
+    "id": "buildings",
+    "type": "fill",
+    "source": "cartiqo",
+    "source-layer":"builtup",
+    "paint": {
+        "fill-color": "#f37788",
+        "fill-outline-color": "#ffffff"
+    }
+}
 ```
 
-### Add extra layers
+### Available layers and types:
 
-We can add extra Sources and Layers to the map, after the style is loaded. 
 
-```js
 
-// On Load add GeoJSON SOURCE and LAYER
-map.on('load', function (e) {
-    // ADD GEOJSON SOURCE
-    map.addSource('punten', {
-        'type': 'geojson',
-        'data': wurjson
-    });
-    // ADD an extra layer
-    map.addLayer({
-        'id': 'geojson-points',
-        'type': 'circle',
-        'source': 'punten',
-        'layout': {},
-        'paint': {
-            'circle-color': '#000fff',
-            'circle-radius': 10
-        }
-    });
-});
-```
 
-:arrow_forward: Create a function `map.on('load, function(){})` in your `main.js` file to add the GeoJSON object.
 
-:information_source: with `map.addSource` we add an extra source to the map. 
 
-:information_source: `map.addLayer` adds an extra layer to the map, **on top off** the map. 
 
-:link: Read about GeoJSON format [ here](http://geojson.org/)
+We can also make use of already existing styles. 
 
-:arrow_forward: Make your own GeoJSON [here](geojson.io)
+:arrow_forward: Have a look at https://ta.webmapper.nl/wm/styles/topography.json to see a complete styling JSON for getting a map of the Netherlands. 
+
+An alternative style is https://ta.webmapper.nl/wm/styles/data_lines.json
+
+:arrow_forward: Copy this whole object as a variable in your `main.js` and see what happens if you style your map with this. 
 
 ## Make a beautiful map visualization. 
 
-:arrow_forward: Try adding more layers, like roads and buildings. Change the colors and make your own map! 
+:arrow_forward: Try to design a map that goes with a existing project you are working on. Use new fonts and the colors of the housestyle of your project.
 
-Change your map settings so you get a nice view. Change colors, add extrusions and layers. Also see if you can use filters.
+:arrow_forward: Think about what is necessary on your map. Do you need a full topographic map for your project or will simple country borders be sufficient? 
+
+:arrow_forward: What is the initial view of your map? Will the user be allowed to scroll and zoom? Set the map settings and view so you control the map. 
 
 :link: Make use of the Mapbox style spec: https://www.mapbox.com/mapbox-gl-js/style-spec/ 
 
 :link: Mapbox also provides a lot of examples: https://www.mapbox.com/mapbox-gl-js/example/simple-map/
 
-:link: and use the  [PDOK Vector Tile documentation](https://github.com/PDOK/vectortiles-bgt-brt ) on how the vector tile set is build up.
-
-:link: Use and copy some inspiration from [this complete style.json](http://geodata.nationaalgeoregister.nl/beta/topotiles-viewer/styles/achtergrond.json)
-
-
 For inspiration:
 :link: Have a look at https://www.mapbox.com/resources/guide-to-map-design-part-1.pdf
+
+## Glyphs & Fonts
+
+In order to add labels we need a font. Fonts have also to be converted to `pbf`, in order to render them with WebGL, these are called Glyphs. Mapbox provides some fonts glyphs but then there are also some open source alternatives and of course we can host them ourselves. 
+
+We add the `glyphs` reference at the top of our style specification. 
+
+```js
+{
+    "version": 8,
+    "name": "Mijn eigen Stijl",
+    "sprite": "url",
+    "glyphs": "url/{fontstack}/{range}.pbf",
+    "sources": {...},
+    "layers": [...]
+}
+```
+
+Using Mapbox fonts is possible by adding the glyphs to the style.json:
+
+    "glyphs": "mapbox://fonts/openmaptiles/{fontstack}/{range}.pbf",
+
+But you do need your mapbox access token again. 
+
+If you do not want to depend on the Mapbox token we can use free providers or make our own. For example the fonts we made at Webmapper:
+
+        "glyphs": "https://ta.webmapper.nl/wm/glyphs/{fontstack}/{range}.pbf",
+
+:arrow_forward: Put the glyphs reference in your style object. place this above the `sources`.
+
+Now we can add a label layer of type `symbol` :
+
+```json
+{
+    "id": "place-labels",
+    "type": "symbol",
+    "source": "cartiqo",
+    "source-layer": "labels",
+    "filter":
+        [
+            "==",
+            "type",
+            "place"
+        ],
+    "minzoom": 8,
+    "maxzoom": 16,
+    "layout": {
+        "text-allow-overlap": false,
+        "text-padding": 1,
+        "text-size": 16,
+        "text-font":  ["Lato"],
+        "text-field": "{name}",
+    },
+    "paint": {
+        "text-halo-blur": 0.5,
+        "text-color":"#1d464d",
+        "text-halo-width": 1,
+        "text-halo-color": "#fff"
+    }
+}      
+```
+
+:arrow_forward: Add this layer at the end of your style object. 
+
+There are a lot of options to style your labels. Have a look at :https://www.mapbox.com/mapbox-gl-js/style-spec#layers-symbol 
+
+The most important is `"text-field" : "{name}"`. This takes the `name` attribute to assign the label text.
+
+Then `"text-font":"["Lato"]` gets the Lato font which is available at our glyphs link.
+
+Other fonts available at Webmapper are:
+
+* `Comfortaa`
+* `DosisLight`
+* `Giraffey`
+* `Lato`
+* `LatoSemi`
+* `Open Sans Regular`
+* `RalewayBold`
+
+`"text-size"` and `"text-color"` are also very important! 
+
+:arrow_forward: Add the labels to your map which you need!
 
 ## Some styling tips.
 
 * The order of the layers in your `style` is the order of drawing. So first defined layer, "background", is drawn first, the next layer is drawn on top, etc. 
 * The labels placing priority is also dependend on the layer order. Layers at the top have less drawing priority, layers at the bottom of the file have more drawing priority!  
-* Is your map slow? Check out :link: [Improve the performance of your MapboxGL map](https://www.mapbox.com/help/mapbox-gl-js-performance/)
-* Using a lot a fill-extrusions will also make your map slow. 
 
 ![creative](https://media.giphy.com/media/3oEduXdm2gjnrsJBOo/giphy.gif)
 
 In [[MapboxGL js part 3]] we give you more information about the possibilities of styling the map and interaction on the map
 
+* Adding a GeoJSON layer
 * Adding multiple sources
 * Fill-extrusion
 * Interaction
 * WebGL support
 * Glyphs & Fonts
 * Sprites & Icons
+
+:no_entry_sign: [Solution](https://github.com/NieneB/aeres_workshop/tree/master/mapbox-gl-js-part-2)
 
 :arrow_right: Go to the next step [[MapboxGL js part 3]] for more advanced mapping!
 

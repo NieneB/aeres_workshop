@@ -172,7 +172,3 @@ Or stored in a separate file, and then referenced somewhere the HTML head:
         <script type="text/javascript" src="myscript.js"></script>
     </head>
 ```
-
-We will learn JavaScript immediately when implementing Leaflet. Because we all came here to make interactive maps!
-
-:arrow_right: **Continue to [[Leaflet Step 1]]**

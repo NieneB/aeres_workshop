@@ -25,13 +25,13 @@ Table of Contents
     Running things locally
     Interesting Links 
 
-========================================================================
+
 Welcome to the Aeres Workshop into Web mapping with Vector Tiles! 
-========================================================================
+-----------------------------------------------------------------
 
 Presentation
 -------------------
-This workshop will start with a `Link presentation <https://nieneb.github.io/mgi_workshop/>`_ to introduce the basic concepts that are needed to do this workshop.
+This workshop will start with a `presentation <https://nieneb.github.io/mgi_workshop/>`_ to introduce the basic concepts that are needed to do this workshop.
 
 Workshop Description
 -------------------

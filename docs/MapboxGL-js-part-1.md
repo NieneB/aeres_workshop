@@ -1,14 +1,13 @@
 
 # Making a map with HTML and JavaScript
 
-We will start with the most basic form of using MapboxGL.js using their already provided styles. In order to use the default styles and data we need a Mapbox token. Later on we will use MapboxGL.js without this token, because we will use our own data and styles! 
+Here we will set up our own web page with a Mapbox GL.js map from scratch. 
 
+For the map we will first use a Mapbox provided style and later add our own style created at Mapbox Studio. In order to use these styles and data we need a Mapbox token. 
 
 :link: If you are not that comfortable with HTML, CSS and JavaScript yet, this [Making a Web page](https://github.com/NieneB/Webmapping_for_beginners/wiki/Making-a-web-page) tutorial will help you along!
 
 :arrow_right: If you already know some HTML, CSS and JavaScript, you can start immediately with this tutorial and read through the HTML explanations. 
-
-:arrow_right: Feel real confident? Just skip [Setting up the basics](#setting-up-the-basics) and go to [Setting up mapboxGL.js](#setting-up-mapboxgl.js)
 
 ## Setting up the basics 
 
@@ -79,8 +78,8 @@ Now we will add the JavaScrip Library MapboxGL.js.
 
 
 ``` html
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet' />
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
 ```
 
 :arrow_forward: Include the JavaScript and CSS files in the `<head>` of your HTML file.
@@ -101,8 +100,8 @@ Your HTML file should look like this:
 <html>
   <head>
     <title>My first MapboxGL map</title>  
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet'/>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet'/>
     <link rel="stylesheet" href="main.css"/>
   </head>
   <body>
@@ -158,24 +157,19 @@ A default Mapbox style contains all the elements we need for a map:
 
 :information_source: `zoom`,`pitch` , `bearing` and `center` set the starting position of our map when opening it the first time. Now pointing to Amsterdam. 
 
+:arrow_forward: Refresh the file in your browser and you will see the Mapbox Street map!
 
-:arrow_forward: Refresh the file in your browser and you will see your map!
-
-Something like this:
-
-![](img/1_mapboxgl_basic_style.png)
-
-
-
-## Use your Mapbox studio hosted style!
+## Use your Mapbox studio hosted style.
 
 In step 1 [[Mapbox Studio]] we created our own styled map. We can also use this instead of the standard supplied Mapbox styles. 
 
 :arrow_forward: Replace the style url with your own style url. 
 
-You can find this url on your Mapbox account under `Share, develop & use` . 
+You can find this url on your Mapbox account under `Share & use`.
 
-![](img/share.png)
+:arrow_forward: Go to the `use` tab and copy the style url.
+
+![](img/shareuse.png)
 
 ```js
  mapboxgl.accessToken = '<YourAccess token>';
@@ -192,6 +186,11 @@ You can find this url on your Mapbox account under `Share, develop & use` .
 
 :arrow_forward: Refresh your browser and see your own Mapbox Studio Map! 
 
+This style and the source for the data are hosted by Mapbox. You can start using Mapbox services for free. But when hosting a lot of your data on their services or using their service for commercial goals Mapbox has a pricing plan. 
+
+In the next step we will learn how to use the Mapbox GL.js library without the Mapbox token, because we will use our own data and styles!
+
+:arrow_right: Next Setting up our own style with [[MapboxGL js part 2]]
 
 ### Problems?
 
@@ -213,5 +212,4 @@ The `Console` logs any errors or comments!
 
 Fix your problems! 
 
-
-:arrow_right: Next Setting up our own style with [[MapboxGL js part 2]]
+:no_entry_sign: [Solution](https://github.com/NieneB/aeres_workshop/tree/master/mapbox-gl-js-part-1)
