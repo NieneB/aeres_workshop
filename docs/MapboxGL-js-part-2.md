@@ -162,17 +162,17 @@ For example:
 }
 ```
 
-### Available layers and types:
+### Available layers and types in cartiqo:
 
 
-
-
-
+![img](./img/layers_types_2.png)
 
 
 We can also make use of already existing styles. 
 
-:arrow_forward: Have a look at https://ta.webmapper.nl/wm/styles/topography.json to see a complete styling JSON for getting a map of the Netherlands. 
+:arrow_forward: Have a look at https://ta.webmapper.nl/wm/styles/topography.json 
+
+This is a complete styling JSON for a map made on the cartiqo source. Using all the above given layers and types. 
 
 An alternative style is https://ta.webmapper.nl/wm/styles/data_lines.json
 
